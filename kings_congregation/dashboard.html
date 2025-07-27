@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Kings Congregation - Dashboard</title>
+    <link rel="stylesheet" href="dashboard.css" />
+    <script src="dashboard.js" defer></script>
+    
+  </head>
+  <body>
+    <header class="dashboard-header">
+      <h1>Kings Congregation</h1>
+      <p>Faculty Attendance Dashboard</p>
+    </header>
+
+    <main class="dashboard-main">
+      <section class="filter-section">
+        <h2>Class Selection</h2>
+        <form id="classForm">
+          <div class="form-group-row">
+            <label>
+              Department:
+              <select id="department" required>
+                <option value="">--Select--</option>
+                <option value="CSE">CSE</option>
+                <option value="ECE">ECE</option>
+                <option value="IT">IT</option>
+                <option value="MECH">MECH</option>
+                <option value="BME">BME</option>
+                <option value="AIDS">AIDS</option>
+                <option value="AIML">AIML</option>
+              </select>
+            </label>
+
+            <label>
+              Year:
+              <select id="year" required>
+                <option value="">--Select--</option>
+                <option value="1">1st Year</option>
+                <option value="2">2nd Year</option>
+                <option value="3">3rd Year</option>
+                <option value="4">4th Year</option>
+              </select>
+            </label>
+
+            <label>
+              Section:
+              <select id="section" required>
+                <option value="">--Select--</option>
+                <option value="A">A</option>
+                <option value="B">B</option>
+              </select>
+            </label>
+
+           <button type="submit" id="startScanBtn">Start Scanning</button>
+
+          </div>
+        </form>
+      </section>
+
+      
+    </main>
+
+    <footer class="dashboard-footer">
+      <p>© 2025 Kings Congregation. All rights reserved.</p>
+    </footer>
+  </body>
+</html>

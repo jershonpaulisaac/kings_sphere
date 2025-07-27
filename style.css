@@ -1,0 +1,125 @@
+/* style.css */
+
+/* Import Poppins font */
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap");
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: "Poppins", sans-serif;
+  margin: 0;
+  background: linear-gradient(120deg, #e0f7fa, #ffffff);
+  color: #002366;
+  display: flex;
+  justify-content: center;
+  padding: 40px 20px;
+  min-height: 100vh;
+  box-sizing: border-box;
+}
+
+/* Layout container */
+.container {
+  max-width: 900px;
+  width: 100%;
+  background: rgba(255, 255, 255, 0.97);
+  border-radius: 20px;
+  padding: 30px;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.12);
+  text-align: center;
+}
+
+/* Header section */
+header {
+  margin-bottom: 30px;
+}
+
+header h1 {
+  margin: 20px 0 10px;
+  font-size: 2.5rem;
+  color: #002366;
+  font-weight: 600;
+}
+
+.college-logo {
+  width: 120px;
+  height: auto;
+}
+
+.official-link a {
+  font-size: 1rem;
+  color: #0073e6;
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.3s ease;
+}
+
+.official-link a:hover {
+  color: #004080;
+}
+
+/* About section */
+.about-section {
+  background-color: #f3faff;
+  border-left: 5px solid #0052cc;
+  padding: 20px;
+  margin-top: 20px;
+  border-radius: 12px;
+  font-size: 1.05rem;
+  text-align: left;
+  animation: fadeIn 0.7s ease forwards;
+}
+
+/* Sphere section */
+.sphere-logo-section {
+  margin-top: 50px;
+}
+
+.sphere-logo-section h2 {
+  font-size: 1.8rem;
+  margin-bottom: 20px;
+  font-weight: 600;
+}
+.sphere-logo {
+  width: 150px;
+  height: auto;
+  cursor: pointer;
+  border-radius: 12px;
+  padding: 5px;
+  box-shadow: 0 0 10px #66ccff, 0 0 20px #66ccff, 0 0 30px #66ccff;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  background-color: white;
+}
+
+.sphere-logo:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 12px #00ccff, 0 0 25px #00ccff, 0 0 40px #00ccff;
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+  header h1 {
+    font-size: 1.8rem;
+  }
+
+  .about-section {
+    font-size: 1rem;
+  }
+
+  .sphere-logo {
+    width: 120px;
+  }
+}
