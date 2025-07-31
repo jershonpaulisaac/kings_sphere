@@ -1,217 +1,187 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>QR Scanner</title>
     <script src="https://unpkg.com/html5-qrcode@2.3.8/html5-qrcode.min.js"></script>
     <style>
-        /* General body styling */
-        body {
-            font-family: 'Segoe UI', sans-serif;
-            background: #f5f7fa;
-            color: #2d2d2d;
-            line-height: 1.6;
-            display: flex; /* Use flexbox for body to center content */
-            flex-direction: column; /* Stack children vertically */
-            align-items: center; /* Center horizontally */
-            padding: 20px; /* Add some padding around the content */
-            min-height: 100vh; /* Ensure body takes full viewport height */
-            box-sizing: border-box;
-        }
-
-        /* Adjust H1 margin for consistency */
-        h1 {
-            margin-top: 20px;
-            margin-bottom: 20px;
-            color: #1e3a8a; /* Consistent header color */
-            font-weight: 600;
-        }
-
-        /* Styles specific to the QR scanner */
+      body {
+        font-family: "Segoe UI", sans-serif;
+        background: #f5f7fa;
+        color: #2d2d2d;
+        line-height: 1.6;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 20px;
+        min-height: 100vh;
+        box-sizing: border-box;
+      }
+      h1 {
+        margin-top: 20px;
+        margin-bottom: 20px;
+        color: #1e3a8a;
+        font-weight: 600;
+      }
+      #reader {
+        width: 400px;
+        max-width: 100%;
+        border: 2px solid #ddd;
+        border-radius: 8px;
+        overflow: hidden;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        margin-bottom: 20px;
+      }
+      #scanned-items-container {
+        margin-top: 20px;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        background-color: #e9e9e9;
+        width: 380px;
+        max-width: 100%;
+        max-height: 300px;
+        overflow-y: auto;
+        text-align: left;
+        font-size: 1.1em;
+        color: #333;
+        box-sizing: border-box;
+      }
+      #scanned-items-container p {
+        color: #666;
+        font-style: italic;
+      }
+      .scanned-item {
+        padding: 8px;
+        margin-bottom: 5px;
+        border-bottom: 1px dashed #bbb;
+        word-wrap: break-word;
+        background-color: #fcfcfc;
+        border-radius: 3px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+      .scanned-item:last-child {
+        border-bottom: none;
+      }
+      .scanned-item .scanned-id {
+        flex-grow: 1;
+        margin-right: 10px;
+      }
+      .scanned-item .attendance-status {
+        font-weight: bold;
+        color: #28a745;
+        white-space: nowrap;
+        text-align: right;
+      }
+      @media (max-width: 500px) {
         #reader {
-            width: 400px; /* Fixed width */
-            max-width: 100%; /* Responsive up to its fixed width */
-            border: 2px solid #ddd;
-            border-radius: 8px;
-            overflow: hidden;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            margin-bottom: 20px; /* Space below the scanner */
+          width: 100%;
         }
-
         #scanned-items-container {
-            margin-top: 20px;
-            padding: 10px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            background-color: #e9e9e9;
-            width: 380px; /* Adjust width to match reader or your layout */
-            max-width: 100%; /* Responsive up to its fixed width */
-            max-height: 300px; /* Optional: Limit height for scrollable area */
-            overflow-y: auto; /* Enable vertical scroll if content exceeds max-height */
-            text-align: left;
-            font-size: 1.1em;
-            color: #333;
-            box-sizing: border-box; /* Include padding in width */
+          width: 100%;
         }
-
-        /* Placeholder text style */
-        #scanned-items-container p {
-            color: #666;
-            font-style: italic;
-        }
-
-        /* Styles for individual scanned items */
-        .scanned-item {
-            padding: 8px;
-            margin-bottom: 5px;
-            border-bottom: 1px dashed #bbb;
-            word-wrap: break-word; /* Ensures long URLs or text wrap */
-            background-color: #fcfcfc;
-            border-radius: 3px;
-
-            /* --- Flexbox for alignment --- */
-            display: flex; /* Enable Flexbox for horizontal alignment */
-            justify-content: space-between; /* Pushes content to ends: ID on left, Present - on right */
-            align-items: center; /* Vertically center items if they have different heights */
-        }
-
-        .scanned-item:last-child {
-            border-bottom: none; /* No border for the last item in the list */
-        }
-
-        /* Style for the scanned ID text within the item */
-        .scanned-item .scanned-id {
-            flex-grow: 1; /* Allows the ID part to take up available space */
-            margin-right: 10px; /* Space between ID and status */
-        }
-
-        /* Style for the "Present -" text */
-        .scanned-item .attendance-status {
-            font-weight: bold;
-            color: #28a745; /* Green color for 'Present' */
-            white-space: nowrap; /* Prevents "Present -" from wrapping to the next line */
-            text-align: right; /* Ensure it aligns right within its flex item */
-        }
-
-        /* Responsive adjustments */
-        @media (max-width: 500px) {
-            #reader {
-                width: 100%; /* Full width on smaller screens */
-            }
-            #scanned-items-container {
-                width: 100%; /* Full width on smaller screens */
-            }
-        }
+      }
     </style>
-</head>
-<body>
+  </head>
+  <body>
     <h1>QR Code Scanner</h1>
     <div id="reader"></div>
     <div id="scanned-items-container">
-        <p>Scanned IDs will appear here:</p>
+      <p>Scanned IDs will appear here:</p>
     </div>
 
     <audio id="beepSound" src="beep.mp3" preload="auto"></audio>
 
     <script>
-        const scannedTexts = new Set();
-        let lastScannedTime = 0;
-        const scanCooldown = 1500;
-        const beepSound = document.getElementById('beepSound');
+      const scannedTexts = new Set();
+      let lastScannedTime = 0;
+      const scanCooldown = 1500;
+      const beepSound = document.getElementById("beepSound");
 
-        // Google Apps Script Web App URL
-        // THIS IS THE URL YOU PROVIDED
-        const GOOGLE_SHEETS_WEB_APP_URL = 'https://script.google.com/macros/s/AKfycbyM_tYyFoIwfl_-XQu9zu1pMsuSparhSaLUjYjd5VeR5UCER_h2wI0rnjLa-vQR12c/exec'; 
+      const GOOGLE_SHEETS_WEB_APP_URL =
+        "https://script.google.com/macros/s/AKfycbyM_tYyFoIwfl_-XQu9zu1pMsuSparhSaLUjYjd5VeR5UCER_h2wI0rnjLa-vQR12c/exec";
 
-        // Function to send scanned data to Google Sheet via Apps Script
-        async function sendScanToGoogleSheet(data) {
-            try {
-                const response = await fetch(GOOGLE_SHEETS_WEB_APP_URL, {
-                    method: 'POST',
-                    mode: 'no-cors', // Important for cross-origin requests to Apps Script
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify({ scannedText: data }) // Send the scanned data as JSON
-                });
+      async function sendScanToGoogleSheet(data) {
+        try {
+          await fetch(GOOGLE_SHEETS_WEB_APP_URL, {
+            method: "POST",
+            mode: "no-cors",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ scannedText: data }),
+          });
+        } catch (error) {
+          alert(
+            "Could not send scan to Google Sheet. Please check your internet connection."
+          );
+        }
+      }
 
-                // With mode: 'no-cors', you won't be able to read the response from Apps Script directly.
-                // The request will succeed in the background. If you need to read a response (e.g., for error handling),
-                // you would need to configure CORS on the Apps Script side if it were a full API.
-                // For simply sending data, 'no-cors' is often sufficient and easier.
-                console.log('Scan data sent to Google Sheet (response not readable due to no-cors mode).');
+      function onScanSuccess(decodedText) {
+        const currentTime = new Date().getTime();
 
-            } catch (error) {
-                console.error('Network or server communication error when sending to Google Sheet:', error);
-                alert('Could not send scan to Google Sheet. Please check your internet connection.');
-            }
+        if (
+          scannedTexts.has(decodedText) &&
+          currentTime - lastScannedTime < scanCooldown
+        ) {
+          return;
         }
 
-        function onScanSuccess(decodedText, decodedResult) {
-            const currentTime = new Date().getTime();
+        scannedTexts.add(decodedText);
+        lastScannedTime = currentTime;
 
-            if (scannedTexts.has(decodedText) && (currentTime - lastScannedTime < scanCooldown)) {
-                console.log(`Duplicate scan within cooldown: ${decodedText}. Ignoring.`);
-                return;
-            }
+        const container = document.getElementById("scanned-items-container");
+        const placeholder = container.querySelector("p");
+        if (
+          placeholder &&
+          placeholder.textContent === "Scanned IDs will appear here:"
+        ) {
+          container.innerHTML = "";
+        }
 
-            console.log(`Code matched = ${decodedText}`, decodedResult);
+        let displayContent = decodedText;
+        try {
+          const url = new URL(decodedText);
+          const nameParam = url.searchParams.get("name");
+          if (nameParam) {
+            displayContent = decodeURIComponent(nameParam);
+          }
+        } catch (e) {}
 
-            scannedTexts.add(decodedText);
-            lastScannedTime = currentTime;
-
-            const container = document.getElementById('scanned-items-container');
-            const placeholder = container.querySelector('p');
-            if (placeholder && placeholder.textContent === 'Scanned IDs will appear here:') {
-                container.innerHTML = '';
-            }
-
-            let displayContent = decodedText;
-            try {
-                const url = new URL(decodedText);
-                const nameParam = url.searchParams.get('name');
-                if (nameParam) {
-                    displayContent = decodeURIComponent(nameParam);
-                }
-            } catch (e) {}
-
-            const newItem = document.createElement('div');
-            newItem.classList.add('scanned-item');
-            newItem.innerHTML = `
+        const newItem = document.createElement("div");
+        newItem.classList.add("scanned-item");
+        newItem.innerHTML = `
                 <span class="scanned-id">${displayContent}</span>
                 <span class="attendance-status">- Present</span>
             `;
 
-            container.prepend(newItem);
+        container.prepend(newItem);
 
-            if (beepSound) {
-                beepSound.currentTime = 0;
-                beepSound.play().catch(e => console.error("Error playing sound:", e));
-            }
-
-            // Call the function to send data to the Google Sheet
-            sendScanToGoogleSheet(decodedText);
+        if (beepSound) {
+          beepSound.currentTime = 0;
+          beepSound.play().catch(() => {});
         }
 
-        function onScanError(errorMessage) {
-            // console.warn(`QR Code scanning error = ${errorMessage}`);
-        }
+        sendScanToGoogleSheet(decodedText);
+      }
 
-        const html5QrcodeScanner = new Html5QrcodeScanner(
-            "reader",
-            {
-                fps: 10,
-                qrbox: { width: 250, height: 250 },
-                disableFlip: false
-            }
+      function onScanError() {}
+
+      const html5QrcodeScanner = new Html5QrcodeScanner("reader", {
+        fps: 10,
+        qrbox: { width: 250, height: 250 },
+        disableFlip: false,
+      });
+
+      html5QrcodeScanner.render(onScanSuccess, onScanError).catch(() => {
+        alert(
+          "Could not start camera for QR scanning. Please ensure camera access is allowed for this site and try again."
         );
-
-        html5QrcodeScanner.render(onScanSuccess, onScanError)
-            .catch(err => {
-                console.error("Failed to start QR scanner:", err);
-                alert("Could not start camera for QR scanning. Please ensure camera access is allowed for this site and try again. Error: " + err.message);
-            });
+      });
     </script>
-</body>
+  </body>
 </html>

@@ -1,54 +1,60 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Kings Sphere</title>
-    <link rel="stylesheet" href="style.css" />
-  </head>
-  <body>
-    <div class="container">
-      <header>
-        <img
-          src="images/college-logo.png"
-          alt="Kings Engineering College Logo"
-          class="college-logo"
-        />
-        <h1>KINGS ENGINEERING COLLEGE</h1>
-        <p class="official-link">
-          <a href="https://www.kingsedu.ac.in/">Visit Official Website</a>
-        </p>
-      </header>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>King's Sphere</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="min-h-screen flex flex-col">
+    <header class="bg-white shadow-sm py-6">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-between items-center">
+            <div class="flex items-center">
+                <div id="logo"><img src="images/kings-sphere-logo.png" alt="King's Sphere Logo" class="h-[100px]"></div>
+                <div class="ml-4">
+                    <h1 class="text-3xl font-bold text-gray-900">Kings Sphere</h1>
+                    <p class="text-sm text-gray-500">A simplified campus life</p>
+                </div>
+            </div>
+            <img src="images/college-logo.png" alt="College Logo" class="h-[90px]">
+        </div>
+    </header>
 
-      <section class="about-section">
-        <p>
-          <strong>
-            Empowering Tomorrow's Innovators with Quality Education and
-            Excellence.
-          </strong>
-        </p>
-        <p>
-          Kings Engineering College focuses on industry-relevant technical
-          education, research, and innovation to uplift society. We prioritize
-          high-quality teaching, career guidance, and supporting economically
-          disadvantaged students. Committed to excellence, we are approved by
-          AICTE and affiliated with Anna University since 2001.
-        </p>
-      </section>
+    <main class="flex-grow py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-semibold text-gray-900">Welcome to Kings Sphere</h2>
+                <div class="header-underline mt-3"></div>
+                <p class="mt-4 text-lg text-gray-600">Access essential campus services with ease and efficiency.</p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <a href="KEC_Bus/home.html" class="portal-card bg-white rounded-lg shadow-md p-6 text-center">
+                    <img src="images/transit-logo.png" alt="King's Transit Logo" class="h-[100px] w-[100px] object-cover rounded-full mx-auto mb-4">
+                    <h3 class="text-xl font-semibold text-gray-900">Kings Transit</h3>
+                    <p class="mt-2 text-gray-600">"From Home to Hall, We’ve Got It All"</p>
+                </a>
+                <a href="KEC_Canteen/home.html" class="portal-card bg-white rounded-lg shadow-md p-6 text-center">
+                    <img src="images/canteen-logo.png" alt="King's Canteen Logo" class="h-[100px] w-[100px] object-cover rounded-full mx-auto mb-4">
+                    <h3 class="text-xl font-semibold text-gray-900">Kings Canteen</h3>
+                    <p class="mt-2 text-gray-600">"Bite, Chat, Repeat"</p>
+                </a>
+                <a href="kings_congregation/index.html" class="portal-card bg-white rounded-lg shadow-md p-6 text-center">
+                    <img src="images/congregation-logo.png" alt="King's Congregation Logo" class="h-[100px] w-[100px] object-cover rounded-full mx-auto mb-4">
+                    <h3 class="text-xl font-semibold text-gray-900">Kings Congregation</h3>
+                    <p class="mt-2 text-gray-600">"One Scan to Be There"</p>
+                </a>
+            </div>
+        </div>
+    </main>
 
-      <section class="sphere-logo-section">
-        <h2>Access the Kings Sphere</h2>
-        <a href="portal.html">
-          <img
-            src="images/kings-sphere-logo.png"
-            alt="Kings Sphere Logo"
-            class="sphere-logo"
-            id="sphereLogo"
-          />
-        </a>
-      </section>
-    </div>
-
+    <footer class="bg-gray-900 text-white py-6">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <p class="text-sm">&copy; 2025 Kings Sphere. All rights reserved.</p>
+            <p class="text-sm mt-2">Developed by <strong>Jershon Paul</strong></p>
+        </div>
+    </footer>
     <script src="script.js"></script>
-  </body>
+</body>
 </html>
